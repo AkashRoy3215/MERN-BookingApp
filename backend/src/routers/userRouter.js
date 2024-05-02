@@ -16,4 +16,15 @@ userRouter.post(
   userController.postUser
 );
 
+userRouter.post(
+  "/login",
+  [
+    check("email", "email is required").isEmail(),
+    check("password", "password with 6 or more characters required").isLength({
+      min: 6,
+    }),
+  ],
+  userController.loginUser
+);
+
 module.exports = userRouter;
