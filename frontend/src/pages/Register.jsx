@@ -1,9 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { set } from "react-hook-form";
 import { useMutation } from "react-query"
+import { useNavigate } from "react-router-dom";
 import * as apiClient from "../api-client";
+import { useAppContext } from "../contexts/AppContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { showToast } = useAppContext();
   const {
     register,
     watch,
@@ -13,10 +18,11 @@ const Register = () => {
 
   const mutation = useMutation(apiClient.register, {
     onSuccess: ()=>{
-        console.log("registration succesful!")
+        showToast({message: "Registration Success!", type: "SUCCESS"});
+        navigate("/");
     },
     onError: (error)=>{
-        console.log(error.message)
+      showToast({message: error.message, type: "ERROR"});
 
     }
   })
@@ -45,7 +51,7 @@ const Register = () => {
             className="border rounded w-full py-1 px-2 font-normal"
             {...register("lastName", { required: "this field is required" })}
           />
-          {errors.LasttName && (
+          {errors.LastName && (
             <span className="text-red-500">{errors.LastName.message}</span>
           )}
         </label>

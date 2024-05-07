@@ -30,7 +30,7 @@ exports.postUser = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       maxAge: 86400000,
     });
-    return res.sendStatus(200);
+    return res.status(200).send({ message: "User regisered OK" });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "something went wrong " });
@@ -68,4 +68,8 @@ exports.loginUser = async (req, res) => {
     console.log(error);
     res.error(500).json({ message: "something went wrong" });
   }
+};
+
+exports.getUser = async (req, res) => {
+  res.status(200).send({ userId: req.userId });
 };
