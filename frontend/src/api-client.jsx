@@ -11,8 +11,24 @@ export const register = async (FormData) => {
   });
   const responseBody = await response.json();
   if (!response.ok) {
-    throw new Error(responseBody.message);
+    throw new Error(body.message);
   }
+};
+
+export const signIn = async (FormData)=>{
+  const response = await fetch(`${API_BASE_URL}/api/users/login`,{
+    method:"POST",
+    credentials: 'include',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(formData)
+  });
+  const body = await response.json();
+  if(!response.ok){
+    throw new Error(body.message);
+  }
+  return body;
 };
 
 export const validateToken = async () => {
