@@ -30,4 +30,6 @@ userRouter.post(
 
 userRouter.get("/validate-token", auth.verifyToken, userController.getUser);
 
+userRouter.post("/logout", userController.logoutUser);
+
 module.exports = userRouter;

@@ -73,3 +73,10 @@ exports.loginUser = async (req, res) => {
 exports.getUser = async (req, res) => {
   res.status(200).send({ userId: req.userId });
 };
+
+exports.logoutUser = async (req, res) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+  res.send();
+};
