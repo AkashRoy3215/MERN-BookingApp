@@ -3,20 +3,20 @@ const cors = require("cors");
 const userRouter = require("./routers/userRouter");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-dotenv.config({ path: "./config.env" });
 
+dotenv.config({ path: "./config.env" });
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json()); //To acess Body.
-app.use(cors({
+app.use(
+  cors({
     origin: process.env.FRONTEND_URL,
     credentials: true,
-})); //For connecting backend from frontend.
+  })
+); //For connecting backend from frontend.
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRouter);
-
-
 
 module.exports = app;
