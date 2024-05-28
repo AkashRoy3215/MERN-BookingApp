@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRouter = require("./routers/userRouter");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
+const myHotels = require("./routers/myHotels");
 
 dotenv.config({ path: "./config.env" });
 
@@ -18,5 +19,6 @@ app.use(
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRouter);
+app.use("api/my-hotels", myHotels);
 
 module.exports = app;
